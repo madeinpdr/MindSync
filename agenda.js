@@ -12,7 +12,7 @@
           "ABRIL",
           "MAIO",
           "JUNHO",
-          "JULHOOG",
+          "JULHO",
           "AGOSTO",
           "SETEMBRO",
           "OUTUBRO",
