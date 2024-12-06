@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aprovação de Agendamentos</title>
+  <link rel="stylesheet" href="approval.css">
+  <style>
+    /* Estilos para a notificação */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #444;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: translateY(-20px);
+      z-index: 1000;
+    }
+
+    .notification.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Estilos para os botões */
+    .approve {
+      background-color: #28a745; /* Verde para Aprovar */
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .approve:hover {
+      background-color: #218838;
+    }
+
+    .reject {
+      background-color: #dc3545; /* Vermelho para Rejeitar */
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .reject:hover {
+      background-color: #c82333;
+    }
+
+    .appointments-table th, .appointments-table td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    .appointments-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .appointments-table th {
+      background-color: #f4f4f4;
+    }
+
+    /* Estilos para o layout */
+    .status-container {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+
+    .status-box {
+      background-color: #f8f9fa;
+      padding: 15px;
+      text-align: center;
+      border: 1px solid #ddd;
+      width: 30%;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .button {
+      text-decoration: none;
+      padding: 10px 20px;
+      margin: 5px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+    }
+
+    .button.secondary {
+      background-color: #6c757d;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="status-container">
+    <div class="status-box" id="pendentes">
+      <h3>Pendentes</h3>
+      <p id="pendentes-count">0</p>
+    </div>
+    <div class="status-box" id="marcados">
+      <h3>Marcados</h3>
+      <p id="marcados-count">0</p>
+    </div>
+    <div class="status-box" id="terminados">
+      <h3>Terminados</h3>
+      <p id="terminados-count">0</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Aprovar ou Rejeitar</h1>
+
+    <!-- Tabela para exibir os agendamentos -->
+    <table class="appointments-table">
+      <thead>
+        <tr>
+          <th>Informações</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="appointments-list">
+        <!-- A lista de agendamentos será preenchida dinamicamente aqui -->
+      </tbody>
+    </table>
+
+    <div class="buttons">
+      <a href="agendamento.html" class="button secondary">Página Anterior</a>
+      
+    </div>
+  </div>
+
+  <!-- Contêiner da notificação -->
+  <div id="notification" class="notification"></div>
+
+  <script>
+    // Recuperando os agendamentos do localStorage
+    let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+
+    // Função para mostrar a notificação
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.classList.add('show');
+
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000); // Notificação desaparece após 3 segundos
+    }
+
+    // Função para atualizar os contadores de status
+    function updateStatusCounts() {
+      const pendingAppointments = appointments.filter(app => app.status === 'Pendente');
+      const approvedAppointments = appointments.filter(app => app.status === 'Aprovado');
+      const rejectedAppointments = appointments.filter(app => app.status === 'Rejeitado');
+
+      document.getElementById('pendentes-count').textContent = pendingAppointments.length;
+      document.getElementById('marcados-count').textContent = approvedAppointments.length;
+      document.getElementById('terminados-count').textContent = rejectedAppointments.length;
+    }
+
+    // Função para atualizar a tabela
+    function updateTable() {
+      const appointmentsList = document.getElementById('appointments-list');
+      appointmentsList.innerHTML = ''; // Limpa a tabela antes de repopulá-la
+
+      if (appointments.length === 0) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = '<td colspan="3">Nenhum agendamento encontrado.</td>';
+        appointmentsList.appendChild(tr);
+        return;
+      }
+
+      const pendingAppointments = appointments.filter(app => app.status === 'Pendente');
+      pendingAppointments.forEach((appointment) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>
+            <strong>Nome:</strong> ${appointment.name || 'Nome não informado'}<br>
+            <strong>Data:</strong> ${appointment.date || 'Data não informada'}<br>
+            <strong>Horário:</strong> ${appointment.time || 'Horário não informado'}<br>
+            <strong>Descrição:</strong> ${appointment.description || 'Descrição não informada'}
+          </td>
+          <td>${appointment.status || 'Status não informado'}</td>
+          <td>
+            <button class="approve" onclick="approveAppointment(${appointment.id})">Aprovar</button>
+            <button class="reject" onclick="rejectAppointment(${appointment.id})">Rejeitar</button>
+          </td>
+        `;
+        appointmentsList.appendChild(tr);
+      });
+    }
+
+    // Função para aprovar o agendamento
+    function approveAppointment(id) {
+      const appointmentIndex = appointments.findIndex(app => app.id === id);
+      if (appointmentIndex !== -1) {
+        appointments[appointmentIndex].status = 'Aprovado'; // Atualiza o status do agendamento
+        showNotification(`Agendamento "${appointments[appointmentIndex].name}" foi aprovado!`);
+        updateAppointments(appointments); // Atualiza o localStorage
+        updateStatusCounts(); // Atualiza os contadores
+        updateTable(); // Atualiza a tabela
+      }
+    }
+
+    // Função para rejeitar o agendamento
+    function rejectAppointment(id) {
+      const appointmentIndex = appointments.findIndex(app => app.id === id);
+      if (appointmentIndex !== -1) {
+        appointments[appointmentIndex].status = 'Rejeitado'; // Atualiza o status do agendamento
+        showNotification(`Agendamento "${appointments[appointmentIndex].name}" foi rejeitado!`);
+        updateAppointments(appointments); // Atualiza o localStorage
+        updateStatusCounts(); // Atualiza os contadores
+        updateTable(); // Atualiza a tabela
+      }
+    }
+
+    // Função para atualizar os agendamentos no localStorage
+    function updateAppointments(updatedAppointments) {
+      localStorage.setItem('appointments', JSON.stringify(updatedAppointments));
+    }
+
+    // Inicializa a página
+    updateStatusCounts(); // Atualiza os contadores
+    updateTable(); // Exibe os agendamentos na tabela
+  </script>
+</body>
+</html>

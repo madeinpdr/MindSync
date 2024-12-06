@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pacientes.css">
+  <title>Lista de Pacientes</title>
+</head>
+
+<body>
+
+  <div class="just">
+    <h1>Planilha de Pacientes</h1>
+    <button id="btnn" onclick="window.location.href='../planilha.html'">Planilha de Pacientes</button>
+  </div>
+
+  <form id="PacientForm" method="POST" action="adicionar_paciente.php">
+    <input type="text" name="nome" id="name" placeholder="Nome do Paciente" required>
+    <input type="date" name="dataConsulta" id="date" placeholder="Data da Consulta" required>
+    <input type="text" name="descricao" id="description" placeholder="Descrição" required>
+    <input type="date" name="proximaConsulta" id="nextConsult" placeholder="Próxima Consulta" required>
+    <input type="tel" name="telefone" id="phone" placeholder="Telefone" required>
+    <input type="number" name="valor" id="value" placeholder="Valor" required>
+    <select name="status" id="status" required>
+      <option value="Não Definido">Não Definido</option>
+      <option value="Faltou">Faltou</option>
+      <option value="Finalizada">Finalizada</option>
+      <option value="Remarcada">Remarcada</option>
+    </select>
+    <button type="submit">Adicionar</button>
+  </form>
+  
+
+  <div class="search-container">
+    <input type="text" id="search" placeholder="Digite o nome do paciente">
+    <button id="search-btn" onclick="pesquisar()">Pesquisar</button>
+  </div>
+
+  <!-- Exibe o nome pesquisado -->
+  <div id="resultado" style="display: none; margin-top: 20px; font-size: 20px;">
+    <p>Paciente encontrado: <span id="paciente-nome"></span></p>
+  </div>
+  </div>
+
+  <!-- Tabela para exibir os pacientes -->
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Paciente</th>
+        <th>Data da Consulta</th>
+        <th>Descrição</th>
+        <th>Próxima Consulta</th>
+        <th>Telefone</th>
+        <th>Valor</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="PacientTableBody">
+      <!-- Os dados dos pacientes serão exibidos aqui -->
+    </tbody>
+  </table>
+
+  <script>
+    // Função para carregar os pacientes da lista e exibir na tabela
+    function loadPacientes() {
+      const pacientTableBody = document.getElementById("PacientTableBody");
+      const pacientes = JSON.parse(localStorage.getItem("pacientes")) || [];
+
+      pacientTableBody.innerHTML = ""; // Limpando a tabela
+
+      // Percorrendo os pacientes e criando as linhas da tabela
+      pacientes.forEach((paciente) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+      <td>${paciente.name}</td>
+      <td>${paciente.date}</td>
+      <td>${paciente.description}</td>
+      <td>${paciente.nextConsult}</td>
+      <td>${paciente.phone}</td>
+      <td>${paciente.value}</td>
+      <!-- Alteração: Adicionando data-status ao status -->
+      <td class="status" data-status="${paciente.status}">${paciente.status}</td>
+    `;
+        pacientTableBody.appendChild(tr); // Adicionando a linha à tabela
+      });
+    }
+
+    // Carregar a lista de pacientes ao carregar a página
+    loadPacientes();
+
+    function pesquisar() {
+      var nomePaciente = document.getElementById("search").value.trim();
+
+      if (nomePaciente) {
+        // Exibe o nome pesquisado
+        document.getElementById("paciente-nome").textContent = nomePaciente;
+        document.getElementById("resultado").style.display = "block"; // Torna visível o resultado
+      } else {
+        alert("Por favor, digite um nome para pesquisa.");
+      }
+    }
+  </script>
+</body>
+
+</html>

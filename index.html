@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Sync - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Estilos Básicos */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('fundo3.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #container {
+            width: 90%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            transform: scale(0);
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .row {
+            display: flex;
+            flex: 1;
+            height: 100%;
+        }
+
+        .col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .form-wrapper {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            text-align: center;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: slideUp 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .form-wrapper form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 10px;
+            color: #666;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px 15px 10px 35px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form button:hover {
+            background-color: #218838;
+        }
+
+        .form p {
+            font-size: 14px;
+        }
+
+        .form p span {
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        .form p span:hover {
+            text-decoration: underline;
+        }
+
+        .text {
+            text-align: center;
+        }
+
+        .text h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .text p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            #container {
+                flex-direction: column;
+            }
+
+            .row {
+                flex-direction: column;
+            }
+
+            .col {
+                padding: 10px;
+            }
+
+            .form-wrapper {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container" class="container">
+        <!-- FORM SECTION -->
+        <div class="row">
+            <!-- SIGN IN -->
+            <div class="col align-items-center flex-col sign-in">
+                <div class="form-wrapper align-items-center">
+                    <form action="login.php" method="POST">
+                        <div class="form sign-in">
+                            <h2>Bem-vindo de volta!</h2>
+                            <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>
+                            <p style="color: red;">Matrícula ou senha inválidos.</p>
+                            <?php endif; ?>
+                            <div class="input-group">
+                                <i class="fa fa-user"></i>
+                                <input type="text" name="username" placeholder="Matrícula" required>
+                            </div>
+                            <div class="input-group">
+                                <i class="fa fa-lock"></i>
+                                <input type="password" name="password" placeholder="Senha" required>
+                            </div>
+                            <button type="submit">Logar</button>
+                            <p>
+                                <span>Precisa de ajuda?</span>
+                                <span onclick="toggle()" class="pointer">Suporte aqui!</span>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- SIGN UP -->
+            <div class="col align-items-center flex-col sign-up">
+                <div class="form-wrapper align-items-center">
+                    <div class="form sign-up">
+                        <h2>Precisa de Suporte?</h2>
+                        <p>Entre em contato com nossa equipe.</p>
+                        <div class="suporte">
+                            <div class="icon">
+                                <a class="btn" href="https://github.com/madeinpdr"><i class="fab fa-github"></i></a>
+                                <a class="btn" href="https://telegram.me/"><i class="fab fa-telegram"></i></a>
+                            </div>
+                        </div>
+                        <p>
+                            <span onclick="toggle()" class="pointer">Voltar ao Login</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END FORM SECTION -->
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+
+        function toggle() {
+            container.classList.toggle('sign-in');
+            container.classList.toggle('sign-up');
+        }
+
+        // Inicialmente carrega o login
+        setTimeout(() => {
+            container.classList.add('sign-in');
+        }, 200);
+
+        //  adicione o seguinte script: 
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('error')) {
+        }
+
+    </script>
+</body>

@@ -1,0 +1,150 @@
+/* Resetando padrões de margens e preenchimentos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+
+}
+
+.container {
+  width: 60%;
+  margin: 180px auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+input, textarea {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+a.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+a.button:hover {
+  background-color: #45a049;
+}
+
+.status-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.status-box {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  width: 30%;
+  border-radius: 8px;
+}
+
+.status-box h3 {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.status-box p {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Estilos para a parte superior com os status */
+/* Estilos para a parte superior com os status */
+.status-container {
+  display: flex;
+  justify-content: space-around;
+  position: relative;  /* Removido 'fixed' e adicionado 'relative' para que as caixas fiquem no fluxo normal */
+  top: 20px;  /* Um pequeno espaço de margem superior */
+  left: 0;
+  width: 100%;
+  
+  z-index: 1;  /* Ajustado o z-index para um valor mais baixo, já que não está mais fixo */
+   /* Sombra para destacar */
+}
+
+.status-box {
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 8px;
+  text-align: center;
+  width: 30%;
+  transition: background-color 0.3s ease;
+}
+
+.status-box h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.status-box p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+.status-box:hover {
+  background-color: #f0f8ff;
+}
+
+#pendentes {
+  border-left: 5px solid #f44336;
+}
+
+#marcados {
+  border-left: 5px solid #ffeb3b;
+}
+
+#terminados {
+  border-left: 5px solid #4CAF50;
+}

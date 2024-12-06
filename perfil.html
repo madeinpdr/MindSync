@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <!-- Link para CSS externo -->
+    <link rel="stylesheet" href="perfil.css">
+
+    <!-- Link para Font Awesome (ícones) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <!-- Link para fonte Montserrat -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400" rel="stylesheet" type="text/css">
+
+    <!-- Link para ícones do Google Material -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Link para Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Estilo adicional para dropdown -->
+    <style>
+        .dropdown-menu {
+            display: none;
+            flex-direction: column;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .dropdown-menu a {
+            text-decoration: none;
+            color: #333;
+            padding: 5px 0;
+        }
+
+        .dropdown-menu a:hover {
+            color: #007BFF;
+        }
+    </style>
+</head>
+
+<body style="background-image: url('fundo3.jpeg'); background-size: cover; background-repeat: no-repeat;">
+    <!-- Sidebar -->
+    <input type="checkbox" id="check">
+    <label for="check">
+        <!-- Ícones de abrir e fechar o menu -->
+        <i class="fas fa-bars" id="btn"></i>
+        <i class="fas fa-times" id="cancel"></i>
+    </label>
+
+    <div class="sidebar">
+        <header>Mind Sync</header>
+        <ul>
+            <li><a href="#"><i class="fas fa-phone"></i>Atendimento</a></li>
+            <li><a href="#"><i class="fas fa-stream"></i>Agenda</a></li>
+            <li><a href="agenda.html"><i class="fas fa-calendar-week"></i>Pacientes</a></li>
+            <li><a href="#"><i class="far fa-envelope"></i>Financeiro</a></li>
+            <li class="dropdown">
+                <!-- Botão de Perfil -->
+                <a href="#" id="perfil-btn"><i class="bi bi-person-circle"></i> Perfil</a>
+                <!-- Menu Dropdown -->
+                <div class="dropdown-menu" id="perfil-menu">
+                    <a href="editpefil.html"><i class="bi bi-person-fill-gear"></i>Editar perfil</a>
+                    <a href="index.html"><i class="bi bi-box-arrow-left"></i>Sair</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        // Adiciona evento ao botão de perfil
+        document.getElementById('perfil-btn').addEventListener('click', function (event) {
+            event.preventDefault(); // Impede o redirecionamento do link
+            const menu = document.getElementById('perfil-menu');
+            // Alterna a visibilidade do menu
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Fecha o menu se clicar fora
+        document.addEventListener('click', function (event) {
+            const perfilMenu = document.getElementById('perfil-menu');
+            const perfilBtn = document.getElementById('perfil-btn');
+            if (!perfilMenu.contains(event.target) && event.target !== perfilBtn) {
+                perfilMenu.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

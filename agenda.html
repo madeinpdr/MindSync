@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <!-- Link para CSS externo -->
+    <link rel="stylesheet" href="agenda.css">
+
+    <!-- Link para Font Awesome (ícones) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <!-- Link para fonte Montserrat -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400" rel="stylesheet" type="text/css">
+
+    <!-- Link para ícones do Google Material -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Link para AngularJS -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//code.angularjs.org/1.3.14/angular-animate.js"></script>
+
+ 
+
+    <!-- Calendário -->
+    <div class="calendar" ng-app="calendarApp" ng-controller="calendarController as calendar" ng-cloak>
+        <!-- Parte esquerda do calendário -->
+        <div class="calendar_left">
+            <div class="header">
+                <!-- Botões para navegar entre os meses -->
+                <i class="material-icons" ng-click="calendar.prev()">navigate_before</i>
+                <h1>{{calendar.month}}</h1>
+                <i class="material-icons" ng-click="calendar.next()">navigate_next</i>
+            </div>
+
+            <!-- Dias da semana -->
+            <div class="days">
+                <div class="day_item">SEG</div>
+                <div class="day_item">TER</div>
+                <div class="day_item">QUA</div>
+                <div class="day_item">QUI</div>
+                <div class="day_item">SEX</div>
+                <div class="day_item">SAB</div>
+                <div class="day_item">DOM</div>
+            </div>
+
+            <!-- Área onde as datas serão renderizadas -->
+            <div class="dates"></div>
+        </div>
+
+        <!-- Parte direita do calendário -->
+        <div class="calendar_right">
+            <!-- Lista de eventos -->
+            <div class="list">
+                <ul>
+                    <!-- Eventos filtrados por ID -->
+                    <li class="bounce-in" ng-repeat="events in calendar.events" ng-show="events.id === calendar.dataId">
+                        <span class="type">{{ events.type }} - </span>
+                        <span class="description">{{ events.description }}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Formulário para adicionar eventos -->
+            <form ng-submit="calendar.add()">
+                <input ng-model="calendar.description" placeholder="NOME" type="text">
+                <select ng-model="calendar.type">
+                    <option value="PACIENTE">PACIENTE</option>
+                    <option value="MEDICO(A) ATENTENDE">MEDICOS</option>
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <!-- Links para os scripts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//code.angularjs.org/1.3.14/angular-animate.js"></script>
+    <script src="./script.js"></script> <!-- Arquivo JavaScript local -->
+    <script src="agenda.js"></script> <!-- Arquivo externo adicional -->
+</body>
+</html>

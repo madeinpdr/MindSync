@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil da Psicóloga</title>
+    <link rel="stylesheet" href="editperfil.css">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-edit-card">
+            <h2>Editar Perfil da Psicóloga</h2>
+            <form id="editProfileForm">
+                <div class="photo-upload">
+                    <label for="profilePic">
+                        <img id="profilePicPreview" src="https://via.placeholder.com/150" alt="Foto de Perfil">
+                    </label>
+                    <input type="file" id="profilePic" accept="image/*" onchange="previewImage(event)">
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" placeholder="Digite o nome completo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="specialization">Especialização</label>
+                    <input type="text" id="specialization" placeholder="Digite sua especialização (ex: Psicologia Clínica)" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="crp">Número do CRP</label>
+                    <input type="text" id="crp" placeholder="Digite o número do CRP" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Descrição Profissional</label>
+                    <textarea id="description" placeholder="Conte um pouco sobre sua experiência e abordagem profissional" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Informações de Contato</label>
+                    <input type="text" id="contact" placeholder="Telefone ou e-mail para contato" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit">Salvar Alterações</button>
+                    <button type="reset">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="editperfil.js"></script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+/* Resetando margens e adicionando estilo básico ao body */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Estilo para o título principal */
+h1 {
+  text-align: center;
+  color: #333;
+  background-color: #d4edda;
+  /* Verde claro */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Estilo do formulário de entrada */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+form input,
+form select,
+form button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+form button {
+  background-color: #28a745;
+  /* Verde claro */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+}
+
+form button:hover {
+  background-color: #218838;
+  /* Verde mais escuro */
+}
+
+/* Estilo da tabela para exibição dos pacientes */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border: 0.5px solid #ddd;
+  /* Linha fina entre células */
+  border-radius: 0;
+  /* Remover bordas arredondadas nas células */
+}
+
+thead {
+  background-color: #28a745;
+  /* Cabeçalho verde claro */
+  color: white;
+  text-align: center;
+}
+
+thead th {
+  background-color: #218838;
+  /* Verde mais escuro para cabeçalho */
+  font-weight: bold;
+}
+
+/* Estilo das células de dados */
+td {
+  background-color: #ffffff;
+  /* Fundo branco nas células */
+  text-align: center;
+}
+
+td button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+button.edit {
+  background-color: #007BFF;
+  /* Azul para botão Editar */
+  color: white;
+}
+
+button.edit:hover {
+  background-color: #0056b3;
+}
+
+button.delete {
+  background-color: #DC3545;
+  /* Vermelho para botão Excluir */
+  color: white;
+}
+
+button.delete:hover {
+  background-color: #c82333;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Garantir bordas quadradas nas células da tabela */
+table td,
+table th {
+  border-radius: 0;
+}
+
+/* Estilo para as linhas do corpo da tabela */
+table tbody tr {
+  background-color: #ffffff;
+  /* Fundo branco nas linhas da tabela */
+}
+
+/* Estilo para o botão de adicionar paciente */
+form button[type="submit"] {
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+/* Estilos para os diferentes status dos pacientes */
+td.status {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+td.status[data-status="Não Definido"] {
+  background-color: #e0e0e0;
+  /* Cinza claro */
+  color: #333;
+}
+
+td.status[data-status="Faltou"] {
+  background-color: #f44336;
+  /* Vermelho */
+  color: white;
+}
+
+td.status[data-status="Finalizada"] {
+  background-color: #4caf50;
+  /* Verde */
+  color: white;
+}
+
+td.status[data-status="Remarcada"] {
+  background-color: #2196f3;
+  /* Azul */
+  color: white;
+}
+
+/* 
+#btnn{
+margin-left: 0px;
+background-color: #218838;
+border: none;
+color: white;
+padding: 15px 32px;
+font-size: 16px;
+cursor: pointer;
+border-radius: 8px;
+right: 70px;
+top: 10px;
+}
+
+#btnn:hover{
+background-color: #218838;
+}
+
+.just{
+position: relative;
+} */
+
+.just {
+  text-align: center;
+  margin-top: 20px;
+}
+
+h1 {
+  color: #333;
+  background-color: #7fdb7f;
+  /* Cor de fundo do título (substitua por uma cor válida) */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#btnn {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-right: 175vh;
+}
+
+#btnn:hover {
+  background-color: #45a049;
+  /* Cor do botão ao passar o mouse */
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 300px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: solid #ddd;
+  margin-top: 20px;
+}
+
+.search-container {
+  margin-top: 50px;
+  display: inline-block;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 250px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#search-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+#search-btn:hover {
+  background-color: #45a049;
+
+}

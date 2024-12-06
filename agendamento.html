@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamento</title>
+  <link rel="stylesheet" href="agendamento.css">
+  <style>
+    /* Estilo para mensagem de confirmação */
+    .confirmation-message {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+      display: none; /* Oculto por padrão */
+    }
+  </style>
+</head>
+<body>
+  <div class="status-container">
+    <div class="status-box" id="pendentes">
+      <h3>Pendentes</h3>
+      <p id="pendentes-count">0</p>
+    </div>
+    <div class="status-box" id="marcados">
+      <h3>Marcados</h3>
+      <p id="marcados-count">0</p>
+    </div>
+    <div class="status-box" id="terminados">
+      <h3>Terminados</h3>
+      <p id="terminados-count">0</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Agendamento</h1>
+    <form id="appointment-form">
+      <label for="name">Nome:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="date">Data:</label>
+      <input type="date" id="date" name="date" required>
+      <label for="time">Horário:</label>
+      <input type="time" id="time" name="time" required>
+      <label for="description">Descrição:</label>
+      <textarea id="description" name="description" rows="4" required></textarea>
+      <button type="submit">Agendar</button>
+    </form>
+
+    <!-- Mensagem de confirmação -->
+    <p id="confirmation-message" class="confirmation-message">
+      Agendamento realizado com sucesso! Você pode verificar os detalhes na página de aprovação.
+    </p>
+
+    <a href="approval.html" class="button">Ir para a página de aprovação</a>
+  </div>
+
+  <script>
+    document.getElementById('appointment-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      const description = document.getElementById('description').value;
+
+      // Criar um objeto com os dados do agendamento
+      const newAppointment = {
+        id: Date.now(), // Adiciona um identificador único
+        name: name,
+        date: date,
+        time: time,
+        description: description,
+        status: 'Pendente' // Status inicial do agendamento
+      };
+
+      // Recuperar os agendamentos do localStorage
+      let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+
+      // Adicionar o novo agendamento à lista
+      appointments.push(newAppointment);
+
+      // Salvar novamente no localStorage
+      localStorage.setItem('appointments', JSON.stringify(appointments));
+
+      // Exibe a mensagem de confirmação
+      const confirmationMessage = document.getElementById('confirmation-message');
+      confirmationMessage.style.display = 'block';
+
+      // Limpa os campos do formulário
+      document.getElementById('appointment-form').reset();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="planilha.css">
+  <title>Planilha de Pacientes</title>
+</head>
+
+<body>
+  <h1>Planilha de Pacientes</h1>
+
+  <!-- Botão para redirecionar para a página pacientes.html -->
+  <button id="btnn" onclick="window.location.href='Lista Paciente/pacientes.html'">Lista de Pacientes</button>
+
+  <!-- Formulário de Adição de Pacientes -->
+  <form id="PacientForm">
+    <input type="text" id="name" placeholder="Nome do Paciente" required>
+    <input type="date" id="date" placeholder="Data da Consulta" required>
+    <input type="text" id="description" placeholder="Descrição" required>
+    <input type="date" id="nextConsult" placeholder="Próxima Consulta" required>
+    <input type="tel" id="phone" placeholder="Telefone" required>
+    <input type="number" id="value" placeholder="Valor" required>
+    <select id="status" required>
+      <option value="Não Definido">Não Definido</option>
+      <option value="Faltou">Faltou</option>
+      <option value="Finalizada">Finalizada</option>
+      <option value="Remarcada">Remarcada</option>
+    </select>
+    <button type="submit">Adicionar</button>
+  </form>
+
+  <!-- Tabela para exibir os pacientes -->
+  <table>
+    <thead>
+      <tr>
+        <th>Paciente</th>
+        <th>Data da Consulta</th>
+        <th>Descrição</th>
+        <th>Próxima Consulta</th>
+        <th>Telefone</th>
+        <th>Valor</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody id="PacientTableBody">
+    </tbody>
+  </table>
+
+
+
+  <script src="planilha.js"></script>
+</body>
+
+</html>

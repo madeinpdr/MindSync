@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista</title>
+  <link rel="stylesheet" href="list.css">
+</head>
+<body>
+  <div class="status-container">
+    <div class="status-box" id="pendentes">
+      <h3>Pendentes</h3>
+      <p id="pendentes-count">0</p>
+    </div>
+    <div class="status-box" id="marcados">
+      <h3>Marcados</h3>
+      <p id="marcados-count">0</p>
+    </div>
+    <div class="status-box" id="terminados">
+      <h3>Terminados</h3>
+      <p id="terminados-count">0</p>
+    </div>
+  </div>
+  
+  <div class="container">
+    <h1>Lista de Agendamentos</h1>
+    <h2>Aprovados:</h2>
+    <ul id="approved-list"></ul>
+    <h2>Rejeitados:</h2>
+    <ul id="rejected-list"></ul>
+   
+  </div>
+
+  <script>
+    let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+
+    const approvedList = document.getElementById('approved-list');
+    const rejectedList = document.getElementById('rejected-list');
+    const pendentesCount = document.getElementById('pendentes-count');
+    const marcadosCount = document.getElementById('marcados-count');
+    const terminadosCount = document.getElementById('terminados-count');
+
+    // Função para remover um agendamento
+    function removeAppointment(index) {
+      // Remove o agendamento do array
+      appointments.splice(index, 1);
+      
+      // Atualiza o localStorage
+      localStorage.setItem('appointments', JSON.stringify(appointments));
+      
+      // Atualiza as listas e os contadores
+      renderAppointments();
+      updateStatusCounts();
+    }
+
+    // Função para renderizar a lista de agendamentos
+    function renderAppointments() {
+      approvedList.innerHTML = '';
+      rejectedList.innerHTML = '';
+
+      appointments.forEach((appointment, index) => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+          ${appointment.name} - ${appointment.date} - ${appointment.time} - ${appointment.description}
+          <button class="remove-btn" onclick="removeAppointment(${index})">X</button>
+        `;
+
+        if (appointment.status === 'Aprovado') {
+          approvedList.appendChild(listItem);
+        } else if (appointment.status === 'Rejeitado') {
+          rejectedList.appendChild(listItem);
+        }
+      });
+    }
+
+    // Função para atualizar os contadores de status
+    function updateStatusCounts() {
+      const pendingAppointments = appointments.filter(app => app.status === 'Pendente');
+      const approvedAppointments = appointments.filter(app => app.status === 'Aprovado');
+      const rejectedAppointments = appointments.filter(app => app.status === 'Rejeitado');
+
+      pendentesCount.textContent = pendingAppointments.length;
+      marcadosCount.textContent = approvedAppointments.length;
+      terminadosCount.textContent = rejectedAppointments.length;
+    }
+
+    // Chama a função para renderizar as listas e atualizar os contadores ao carregar a página
+    renderAppointments();
+    updateStatusCounts();
+  </script>
+</body>
+</html>

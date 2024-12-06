@@ -1,0 +1,180 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  background-color: #d4edda;
+  /* Verde claro */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+form input,
+form select,
+form button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+form button {
+  background-color: #28a745;
+  /* Verde claro */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #218838;
+  /* Verde mais escuro */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  /* Linha contínua entre as células */
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border: 0.5px solid #ddd;
+  /* Linha muito fina entre as células */
+  border-radius: 0;
+  /* Remover bordas arredondadas para manter o estilo de linha */
+}
+
+thead {
+  background-color: #28a745;
+  /* Cabeçalho verde claro */
+  color: white;
+  text-align: center;
+}
+
+thead th {
+  background-color: #218838;
+  /* Verde mais escuro para o cabeçalho */
+  font-weight: bold;
+}
+
+td {
+  background-color: #ffffff;
+  /* Fundo branco para os dados dos pacientes */
+  text-align: center;
+}
+
+td button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+button.edit {
+  background-color: #007BFF;
+  /* Azul para o botão Editar */
+  color: white;
+}
+
+button.edit:hover {
+  background-color: #0056b3;
+}
+
+button.delete {
+  background-color: #DC3545;
+  /* Vermelho para o botão Excluir */
+  color: white;
+}
+
+button.delete:hover {
+  background-color: #c82333;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+table td,
+table th {
+  border-radius: 0;
+  /* Garantir que as células da tabela fiquem quadradas */
+}
+
+table tbody tr {
+  background-color: #ffffff;
+  /* Fundo branco para as linhas da tabela */
+}
+
+/* Estilo do botão de "Adicionar" */
+form button[type="submit"] {
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+/* Estilos para o Status */
+td.status {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+td.status[data-status="Não Definido"] {
+  background-color: #e0e0e0;
+  /* Cinza claro */
+  color: #333;
+}
+
+td.status[data-status="Faltou"] {
+  background-color: #f44336;
+  /* Vermelho */
+  color: white;
+}
+
+td.status[data-status="Finalizada"] {
+  background-color: #4caf50;
+  /* Verde */
+  color: white;
+}
+
+td.status[data-status="Remarcada"] {
+  background-color: #2196f3;
+  /* Azul */
+  color: white;
+}
+
+#btnn {
+  background-color: #218838;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+#btnn:hover {
+  background-color: #218838;
+}
